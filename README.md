@@ -45,17 +45,15 @@ Ou seja, coloquem o script no directório com os testes (onde estão os .in e .i
 É gerado o ficheiro "results" com um log. Exemplo de resultados:
 
 ```sh
-TEST: /A-004-001-M-ok
+TEST: /A-005-001-M-ok
 	Passed!
 
-TEST: /A-006-001-M-ok
-	Passed!
-
-TEST: /A-005-003-M-ok
+TEST: /A-005-002-M-ok
 	Failed!
-	< Dimensão do documento (bytes): 273
-	---
-	> Dimensão do documento (bytes): 269
+		14c14
+		< Dimensão do documento (bytes): 212
+		---
+		> Dimensão do documento (bytes): 208
 ```
 ### Testes futuros
 O script usa regex para descobrir todos os inputs, imports e outputs, corrê-los e compará-los em vez de correr uma série de testes já conhecidos. Ou seja deve funcionar mesmo que adicionem testes novos feitos pelo prof ou feitos por vocês.
