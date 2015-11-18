@@ -1,4 +1,20 @@
 # POScript
+## Instalação
+Isto só funciona em Linux.
+* Fazer download (ali ao lado)
+* Copiar para a pasta onde estão os testes:
+```sh
+$ unzip ~/Downloads/POscript-master.zip -d ~/path/para/a/pasta/de/testes
+```
+* Dar permissões de execução:
+```sh
+$ chmod +x ./run.sh
+```
+* Executar:
+```sh
+$ ./run.sh
+```
+
 ### Estrutura
 Este script espera uma estrutura deste tipo:
 
