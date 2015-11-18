@@ -38,8 +38,8 @@ Este script espera uma estrutura deste tipo:
 
 | etc...
 
-│   ├── results <- O ficheiro de resultados gerado
-│   └── run.sh <- O meu script
+>│   ├── results <- O ficheiro de resultados gerado
+>│   └── run.sh <- O meu script
 
 
 Ou seja, coloquem o script no directório com os inputs dos testes (onde estão os .in e .import) e coloquem este no mesmo directório onde está o directório project que contém o edt-core e edt-textui.
