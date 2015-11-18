@@ -23,7 +23,7 @@ Este script espera uma estrutura deste tipo:
 │   └── run.sh <- O meu script  
 
 
-Ou seja, coloquem o script no directório com os inputs dos testes (onde estão os .in e .import) e coloquem este no mesmo directório onde está o directório project que contém o edt-core e edt-textui.
+Ou seja, coloquem o script no directório com os testes (onde estão os .in e .import) e coloquem este no mesmo directório onde está o directório "project" que contém o "edt-core" e "edt-textui".
 
 ### Log
 É gerado o ficheiro "results" com um log. Exemplo de resultados:
@@ -41,3 +41,5 @@ TEST: /A-005-003-M-ok
 	---
 	> Dimensão do documento (bytes): 269
 ```
+### Testes futuros
+O script usa regex para descobrir todos os inputs, imports e outputs, corrê-los e compará-los em vez de correr uma série de testes já conhecidos. Ou seja deve funcionar mesmo que adicionem testes novos feitos pelo prof ou feitos por vocês.
