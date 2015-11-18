@@ -39,7 +39,6 @@ Este script espera uma estrutura deste tipo:
 | etc...
 
 │   ├── results <- O ficheiro de resultados gerado
-
 │   └── run.sh <- O meu script
 
 
