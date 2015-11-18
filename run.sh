@@ -13,7 +13,7 @@ tempfile="temp"
 make -C ../project/
 echo -n "" > $logfile
 
-for inputfile in `find . -regextype posix-extended  -regex "$common""$input"`
+for inputfile in `find . -regextype posix-extended  -regex "$common""$input" | sort`
 do
 	echo "INPUT: ""$inputfile"
 	commonfile=$(echo $inputfile | cut -d '.' -f 2 -s)
@@ -41,8 +41,7 @@ do
 	else
 		echo -e "\tFailed!" >> $logfile
 		echo -e "$differences" > $tempfile
-		sed 's/^/\t/' -i $tempfile
-		sed '1d' -i $tempfile
+		sed 's/^/\t\t/' -i $tempfile
 		cat $tempfile >> $logfile
 		echo -e "\n" >> $logfile
 	fi
