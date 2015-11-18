@@ -5,23 +5,41 @@ Este script espera uma estrutura deste tipo:
 
 ./
 ├── project
+
 │   ├── CVS
+
 │   ├── edt-core
+
 │   ├── edt-textui
+
 │   └── po-uilib-201509301826
+
 ├── tests-ei-eval-201511161200
+
 │   ├── A-001-001-M-ok.in
+
 │   ├── A-001-001-M-ok.outhyp
+
 │   ├── A-001-002-M-ok.in
+
 │   ├── A-001-002-M-ok.outhyp
+
 │   ├── A-002-001-M-ok.import
+
 | etc...
+
 │   ├── expected
+
 │   │   ├── A-001-001-M-ok.out
+
 │   │   ├── A-001-002-M-ok.out
+
 │   │   ├── A-002-001-M-ok.out
+
 | etc...
+
 │   ├── results <- O ficheiro de resultados gerado
+
 │   └── run.sh <- O meu script
 
 
