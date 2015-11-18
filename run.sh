@@ -8,6 +8,7 @@ import="import"
 output="outhyp"
 expected="out"
 logfile="results"
+tempfile="temp"
 
 make -C ../project/
 echo -n "" > $logfile
@@ -39,13 +40,13 @@ do
 		echo -e "\tPassed!\n" >> $logfile
 	else
 		echo -e "\tFailed!" >> $logfile
-		echo -e "$differences" > temp_do_not_fucking_touch
-		sed 's/^/\t/' -i temp_do_not_fucking_touch
-		sed '1d' -i temp_do_not_fucking_touch
-		cat temp_do_not_fucking_touch >> $logfile
+		echo -e "$differences" > $tempfile
+		sed 's/^/\t/' -i $tempfile
+		sed '1d' -i $tempfile
+		cat $tempfile >> $logfile
 		echo -e "\n" >> $logfile
 	fi
-	rm -f temp_do_not_fucking_touch
+	rm -f $tempfile
 	
 	echo ""
 done
