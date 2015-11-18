@@ -42,7 +42,7 @@ Este script espera uma estrutura deste tipo:
 Ou seja, coloquem o script no directório com os testes (onde estão os .in e .import) e coloquem este no mesmo directório onde está o directório "project" que contém o "edt-core" e "edt-textui".
 
 ### Log
-É gerado o ficheiro "results" com um log. Exemplo de resultados:
+É gerado o ficheiro "results" com um log, mostra "Passed!" para cada teste sem erros e "Failed!" com as diferenças de output para cada teste que falhou. Exemplo de resultados:
 
 ```sh
 TEST: /A-005-001-M-ok
