@@ -18,6 +18,7 @@ do
 	echo "INPUT: ""$inputfile"
 	commonfile=$(echo $inputfile | cut -d '.' -f 2 -s)
 	outputfile=".$commonfile.$output"
+	"" > $outputfile
 	echo "OUTPUT: $outputfile"
 	javaoptions="-Din=$inputfile -Dout=$outputfile"
 	
