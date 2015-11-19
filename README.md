@@ -1,7 +1,7 @@
 # POScript
 O que o script faz é compilar o project ("make" no directório "project"), e depois para cada input (.in) encontra o import caso exista (.import) e faz um output (.outhyp). Corre o teste, escreve o output, compara o output obtido com o output esperado, e escreve o sucesso ou insucesso num log.  
 ## Instalação
-Isto só funciona em Linux.
+Isto só funciona em SOs que tenham bash (Linux, OS X, Windows com Mingw/Cygwin/outras coisas parvas).
 * Fazer download (ali ao lado)
 * Copiar para a pasta onde estão os testes:
 ```sh
