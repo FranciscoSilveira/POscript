@@ -47,9 +47,11 @@ Ou seja, coloquem o script no directório com os testes (onde estão os .in e .i
 
 ```sh
 TEST: /A-005-001-M-ok
+	OPTIONS:-Din=./A-005-001-M-ok.in -Dout=./A-005-001-M-ok.outhyp
 	Passed!
 
 TEST: /A-005-002-M-ok
+	OPTIONS:-Din=./A-005-002-M-ok.in -Dout=./A-005-002-M-ok.outhyp
 	Failed!
 		14c14
 		< Dimensão do documento (bytes): 212
