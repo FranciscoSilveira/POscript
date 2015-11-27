@@ -12,43 +12,45 @@ tempfile="temp"
 
 make -C ../project/
 echo -n "" > $logfile
-
+failed=0
+passed=0
+echo -e "\nRunning tests\n"
 for inputfile in `find . -regextype posix-extended  -regex "$common""$input" | sort`
 do
-	echo "INPUT: ""$inputfile"
 	commonfile=$(echo $inputfile | cut -d '.' -f 2 -s)
 	outputfile=".$commonfile.$output"
 	echo "" > $outputfile
-	echo "OUTPUT: $outputfile"
 	javaoptions="-Din=$inputfile -Dout=$outputfile"
 	
 	importfile=".$commonfile.$import"
 	if [ -f $importfile ]
 	then
-		echo "IMPORT: ""$importfile"
-		javaoptions="-Dimport=$importfile $javaoptions"
+	javaoptions="-Dimport=$importfile $javaoptions"
 	fi
-	echo "JAVAOPTIONS: $javaoptions"
-	
+		
 	java $javaoptions $classpath $mainclass
 	
 	expectedfile="./expected/$commonfile.$expected"
-	echo "TEST: $commonfile" >> $logfile
+	echo -e "TEST: $commonfile\n\tOPTIONS:$javaoptions" >> $logfile
 	
 	differences=`diff $outputfile $expectedfile`
 	if [[ -z $differences ]]
 	then
 		echo -e "\tPassed!\n" >> $logfile
+		passed=$((passed+1))
 	else
 		echo -e "\tFailed!" >> $logfile
 		echo -e "$differences" > $tempfile
 		sed 's/^/\t\t/' -i $tempfile
 		cat $tempfile >> $logfile
 		echo -e "\n" >> $logfile
+		failed=$((failed+1))
 	fi
 	rm -f $tempfile
 	
-	echo ""
 done
+result="Passed:$passed\nFailed:$failed" 
+sed "1s/^/$result\n\n/" -i $logfile
+echo -e $result"\nSee file '$logfile' for more information"
 
 exit 0
