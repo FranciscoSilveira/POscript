@@ -1,7 +1,7 @@
 # POScript
 O que o script faz é compilar o project, correr um teste para cada input com um import caso exista, comparar o output obtido com o output esperado, e escreve o sucesso ou insucesso num log.  
 ## Instalação
-Isto só funciona em SOs que tenham bash (Linux, OS X, Windows com Mingw/Cygwin/outras coisas parvas).
+Isto só funciona em SOs que tenham bash.
 * Fazer download (ali ao lado)
 * Copiar para a pasta onde estão os testes:
 ```sh
