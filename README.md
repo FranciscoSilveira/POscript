@@ -59,4 +59,4 @@ TEST: /A-005-002-M-ok
 		> Dimensão do documento (bytes): 208
 ```
 ### Testes futuros
-O script usa regex para descobrir todos os inputs, imports e outputs, corrê-los e compará-los em vez de correr uma série de testes já conhecidos. Ou seja deve funcionar mesmo que adicionem testes novos feitos pelo prof ou feitos por vocês.
+O script usa regex para descobrir todos os inputs, imports e outputs, corrê-los e compará-los em vez de correr uma série de testes já conhecidos. Ou seja deve funcionar mesmo que adicionem testes novos feitos pelo professor ou feitos por vocês.
