@@ -1,13 +1,13 @@
 #!/bin/bash
 
-classpath="-cp ../project/edt-textui/edt-textui.jar:../project/edt-core/edt-core.jar:../project/edt-support.jar:../project/po-uilib.jar"
+classpath="-cp $(JAVADIR)/po-uilib.jar:../project/pex-core/pex-core.jar:../project/pex-app/pex-app.jar"
 mainclass="edt.textui.TextEditor"
 common=".*/A-([0-9]{3})-([0-9]{3})-M-ok."
 input="in"
 import="import"
 output="outhyp"
 expected="out"
-logfile="results"
+logfile="results.txt"
 tempfile="temp"
 
 make -C ../project/
@@ -25,7 +25,7 @@ do
 	importfile=".$commonfile.$import"
 	if [ -f $importfile ]
 	then
-	javaoptions="-Dimport=$importfile $javaoptions"
+		javaoptions="-Dimport=$importfile $javaoptions"
 	fi
 		
 	java $javaoptions $classpath $mainclass
@@ -40,7 +40,6 @@ do
 	else
 		echo -e "\tFailed!" >> $logfile
 		differences=`echo -e "$differences" | sed 's/^/\t\t/'`
-		echo -e "$differences"
 		echo -e "$differences\n" >> $logfile
 		failed=$((failed+1))
 	fi
