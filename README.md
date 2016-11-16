@@ -1,5 +1,5 @@
 # POScript
-O que o script faz é compilar o projecto, correr todos os testes (com um import caso exista), comparar o output obtido com o output esperado e escrever o sucesso ou insucesso num log.  
+O que o script faz é compilar o projecto, correr todos os testes (com um import caso exista), comparar o output obtido com o output esperado e escrever o sucesso ou insucesso num log.
 
 ## Compatibilidade
 O script está escrito em bash, portanto logicamente só corre em SO's com bash.
@@ -22,10 +22,10 @@ $ chmod +x ./run.sh
 $ ./run.sh
 ```
 #### Definir o classpath
-Se ocorrerem erros de "Symbol not found" é necessário definir onde estão as classes a usar na execução. Isto é feito com a variável 'classpath' no topo do script, que deve incluir os caminhos para todos os .jar do projecto.
+Se ocorrerem erros de "Symbol not found" é necessário definir onde estão as classes a usar na execução. Isto é feito com a variável 'classpath' no topo do script, que deve incluir os caminhos para todos os .jar do projecto separados por um ':' (sem aspas).
 
 ### Estrutura
-Este script espera uma estrutura deste tipo:
+Este script espera uma estrutura como ilustrado abaixo. *Não corre com qualquer outra estrutura e precisa que o ponto de execução seja a pasta de testes* (ou seja ./run2016.sh funciona correctamente, ./tests-ei-eval/run.sh não).
 
 ./  
 ├── project  
