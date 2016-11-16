@@ -1,7 +1,13 @@
 # POScript
-O que o script faz é compilar o project, correr um teste para cada input com um import caso exista, comparar o output obtido com o output esperado, e escreve o sucesso ou insucesso num log.  
+O que o script faz é compilar o projecto, correr todos os testes (com um import caso exista), comparar o output obtido com o output esperado e escrever o sucesso ou insucesso num log.  
+
+## Compatibilidade
+O script está escrito em bash, portanto logicamente só corre em SO's com bash.
+* Linux (incluíndo a VM do projecto): compatibilidade total
+* Windows: o Windows 10 aparentemente inclui uma versão canibalizada do kernel de linux e coreutils, logo teoricamente deve correr
+* macOS/OS X: à partida deve correr, contudo o script usa um standard de regex (Posix-extended) que é possível que a Apple não inclua
+
 ## Instalação
-Isto só funciona em SOs que tenham bash.
 * Fazer download (ali ao lado)
 * Copiar para a pasta onde estão os testes:
 ```sh
@@ -15,6 +21,8 @@ $ chmod +x ./run.sh
 ```sh
 $ ./run.sh
 ```
+#### Definir o classpath
+Se ocorrerem erros de "Symbol not found" é necessário definir onde estão as classes a usar na execução. Isto é feito com a variável 'classpath' no topo do script, que deve incluir os caminhos para todos os .jar do projecto.
 
 ### Estrutura
 Este script espera uma estrutura deste tipo:
@@ -24,7 +32,7 @@ Este script espera uma estrutura deste tipo:
 │   ├── CVS  
 │   ├── edt-core  
 │   └── edt-textui    
-├── tests-ei-eval-201511161200  
+├── tests-ei-eval-201611171200  
 │   ├── A-001-001-M-ok.in  
 │   ├── A-001-001-M-ok.outhyp  
 │   ├── A-001-002-M-ok.in  
@@ -37,7 +45,7 @@ Este script espera uma estrutura deste tipo:
 │   │   ├── A-002-001-M-ok.out  
 │   │   │ etc...  
 │   ├── results <- O ficheiro de resultados gerado  
-│   └── run.sh <- O meu script  
+│   └── run.sh <- O script  
 
 
 Ou seja, coloquem o script no directório com os testes (onde estão os .in e .import) e coloquem este no mesmo directório onde está o directório "project" que contém o "edt-core" e "edt-textui".
