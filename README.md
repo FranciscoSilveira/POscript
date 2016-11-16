@@ -17,10 +17,7 @@ $ unzip ~/Downloads/POscript-master.zip -d ~/path/para/a/pasta/de/testes
 ```sh
 $ chmod +x ./run.sh
 ```
-* Executar:
-```sh
-$ ./run.sh
-```
+
 #### Definir o classpath
 Se ocorrerem erros de "Symbol not found" é necessário definir onde estão as classes a usar na execução. Isto é feito com a variável 'classpath' no topo do script, que deve incluir os caminhos para todos os .jar do projecto separados por um ':' (sem aspas).
 
@@ -50,8 +47,15 @@ Este script espera uma estrutura como ilustrado abaixo. *Não corre com qualquer
 
 Ou seja, coloquem o script no directório com os testes (onde estão os .in e .import) e coloquem este no mesmo directório onde está o directório "project" que contém o "edt-core" e "edt-textui".
 
-### Log
-É gerado o ficheiro "results" com um log, mostra "Passed!" para cada teste sem erros e "Failed!" com as diferenças de output para cada teste que falhou. Exemplo de resultados:
+### Executar
+**O script não corre com qualquer outra estrutura que não a mostrada acima e precisa que o ponto de execução seja a pasta de testes** (ou seja ./run2016.sh funciona correctamente, ./tests-ei-eval/run2016.sh não).
+```sh
+$ cd ~/path/para/a/pasta/de/testes
+$ ./run.sh
+```
+
+### Resultados
+É gerado o ficheiro "results" que mostra "Passed!" para cada teste sem erros e "Failed!" com as diferenças de output para cada teste que falhou. Exemplo:
 
 ```sh
 TEST: /A-005-001-M-ok
