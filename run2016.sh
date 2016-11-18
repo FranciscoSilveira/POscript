@@ -40,7 +40,6 @@ function test {
 		
 		# Find and add an import file for this test, if it exists
 		importfile="$commonfile.$import"
-		echo "Import file: ""$importfile"
 		if [ -f $importfile ]
 		then
 			javaoptions="-Dimport=$importfile $javaoptions"
