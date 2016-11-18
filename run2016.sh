@@ -11,7 +11,7 @@ expected="out"
 logfile="results.txt"
 
 function compile {
-	make_dirs=("../pex-core/" "../pex-core/")
+	make_dirs=("../pex-app/" "../pex-core/")
 	for dir in "${make_dirs[@]}"
 	do
 		make -C "$dir"
