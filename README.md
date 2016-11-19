@@ -26,7 +26,7 @@ $ ./run2016.sh
 O classpath do script é o da máquina virtual. Se compilarem o po-uuilib e deixarem o .jar na pasta ou o meterem noutra pasta qualquer, é necessário definir o classpath **no script** de acordo com isso.
 
 ### Estrutura
-Este script espera uma estrutura como ilustrado abaixo. *Não corre com qualquer outra estrutura e precisa que o ponto de execução seja a pasta de testes* (ou seja ./run2016.sh funciona correctamente, ./tests-ei-eval/run.sh não).
+Este script espera uma estrutura como ilustrado abaixo.
 ```
 project
 ├── pex-app
