@@ -51,7 +51,7 @@ function test {
 		# Compare the obtained output to the expected
 		expectedfile="./expected/$commonfile.$expected"
 		echo -e "TEST: $commonfile\n\tOPTIONS:$javaoptions" >> $logfile
-		differences=`diff -b $outputfile $expectedfile`
+		differences=`diff -w $outputfile $expectedfile`
 		if [[ -z $differences ]]
 		then
 			echo -e "\tPassed!\n" >> $logfile
