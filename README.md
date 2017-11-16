@@ -3,70 +3,34 @@ O que o script faz é compilar o projecto, correr todos os testes (com um import
 
 ## Compatibilidade
 O script está escrito em bash, portanto logicamente só corre em SO's com bash.
+
 * Linux (incluíndo a VM do projecto): compatibilidade total
 * Windows: o Windows 10 aparentemente inclui uma versão canibalizada do kernel de linux e coreutils, logo teoricamente deve correr
-* macOS/BSD: à partida deve correr, contudo é necessário mudar a flag "-regex-type posix-extended" para "-E". Pode haver mais problemas
+* macOS/BSD: à partida deve correr, contudo é necessário mudar a flag "-regex-type posix-extended" para "-E" na procura de ficheiros .in (linha 80). Pode haver mais problemas
 
-## Instalação
+## Instalação e resultados
 * Fazer download (ali ao lado)
 * Copiar para a pasta onde estão os testes:
 ```sh
-$ unzip ~/Downloads/POscript-master.zip -d ~/path/para/a/pasta/de/testes
+$ unzip ~/Downloads/POscript-master.zip -d ~/path/para/a/pasta/do/projecto
 ```
 * Dar permissões de execução:
 ```sh
-$ chmod +x ./run.sh
+$ chmod +x ./run2017.sh
 ```
 * Executar:
 ```sh
-$ ./run2016.sh
+$ ./run2017.sh
 ```
 
-#### Definir o classpath
-O classpath do script é o da máquina virtual. Se compilarem o po-uuilib e deixarem o .jar na pasta ou o meterem noutra pasta qualquer, é necessário definir o classpath **no script** de acordo com isso.
+É gerado o ficheiro "results.txt" que mostra "Passed!" para cada teste sem erros e "Failed!" com as diferenças de output para cada teste que falhou. Exemplo:
 
-### Estrutura
-Este script espera uma estrutura como ilustrado abaixo.
 ```
-project
-├── pex-app
-│   ├── examples
-│   ├── Makefile
-│   ├── pex-app.jar
-│   └── src
-│       └── ...
-├── pex-core
-│   ├── Makefile
-│   ├── pex-core.jar
-│   └── src
-│       └── ...
-└── tests-ei-daily-201611071926
-    ├── A-001-001-M-ok.in
-    ├── A-001-002-M-ok.import
-    ├── A-001-002-M-ok.in
-    ├── A-001-003-M-ok.in
-    ├── ...
-    ├── expected
-    │   ├── A-001-001-M-ok.out
-    │   ├── A-001-002-M-ok.out
-    │   ├── A-001-003-M-ok.out
-    │   └── ...
-    ├── prim.tex
-    ├── results.txt **<= Ficheiro de resultados**
-    └── run2016.sh **<= Script**
-```
-
-Ou seja, o script fica no directório com os testes (onde estão os .in e .import), e este fica no mesmo directório onde estão o "pex-core" e "pex-app". **O script não corre com qualquer outra estrutura que não a mostrada acima e precisa que o ponto de execução seja a pasta de testes** (ou seja ./run2016.sh funciona correctamente, ./tests-ei-eval/run2016.sh não).
-
-### Resultados
-É gerado o ficheiro "results" que mostra "Passed!" para cada teste sem erros e "Failed!" com as diferenças de output para cada teste que falhou. Exemplo:
-
-```sh
 TEST: A-001-001-M-ok
-	OPTIONS:-cp /usr/share/java/po-uuilib.jar:../pex-core/pex-core.jar:../pex-app/pex-app.jar -Din=./A-001-001-M-ok.in -Dout=.A-001-001-M-ok.outhyp
+	OPTIONS: -cp /usr/share/java/po-uuilib.jar:../mmt-core/mmt-core.jar:../mmt-app/mmt-app.jar -Din=./A-001-001.in -Dout=.A-001-001.outhyp
 	Passed!
 TEST: A-001-003-M-ok
-	OPTIONS:-cp /usr/share/java/po-uuilib.jar:../pex-core/pex-core.jar:../pex-app/pex-app.jar -Din=./A-001-003-M-ok.in -Dout=.A-001-003-M-ok.outhyp
+	OPTIONS: -cp /usr/share/java/po-uuilib.jar:../mmt-core/mmt-core.jar:../mmt-app/mmt-app.jar -Din=./A-001-003.in -Dout=.A-001-003.outhyp
 	Failed!
 		10c10,11
 		< Escolha uma opção: Nome do program: Menu Principal
@@ -74,5 +38,48 @@ TEST: A-001-003-M-ok
 		> Escolha uma opção: Nome do program: O programa a não existe.
 		> Menu Principal
 ```
-### Testes futuros
+
+## Opções
+É possvel definir as directorias de testes e código com flags:
+
+* **-s /path/to/source** : define a directoria onde estão as directorias mmt-app e mmt-core. Isto é usado na compilação dos pacotes e na execução dos testes (classpath).
+* **-t /path/to/tests** : define as directorias onde estão os ficheiros de teste
+
+**O ficheiro de resultados é sempre escrito na directoria actual da shell,** independentemente de terem usado flags ou não, ou de sequer estarem na pasta do script. Ex:
+```sh
+$ cd ~
+$ ~/Downloads/run2017.sh -s ~/Documents/PO/projecto -t ~/testes_de_PO
+$ cat ./results.txt
+```
+Caso não queiram usar as flags (y tho), o script vai procurar as directorias mmt-app, mmt-core e Tests-ei-daily-201711101726 na pasta onde está. Ou seja, é esperada uma estrutura deste género:
+```
+project
+├── run2017.sh
+├── mmt-app
+│   ├── examples
+│   ├── Makefile
+│   ├── mmt-app.jar
+│   └── src
+│       └── ...
+├── mmt-core
+│   ├── Makefile
+│   ├── mmt-core.jar
+│   └── src
+│       └── ...
+└── Tests-ei-daily-201711101726
+    ├── A-001-001.in
+    ├── A-001-001.out
+    ├── A-001-002.import
+    ├── A-001-002.in
+    ├── A-001-002.out
+    ├── A-001-003.in
+    ├── A-001-003.out
+    └── ...
+```
+
+### Definir o classpath para o .jar fornecido pelos docentes
+O classpath para a parte fornecida é o da VM (/usr/share/java/po-uuilib.jar). Se compilarem o po-uuilib e deixarem o .jar na pasta ou o meterem noutra pasta qualquer, é necessário definir essa parte do classpath **no script** de acordo com isso.
+
+
+## Testes futuros
 O script usa regex para descobrir todos os inputs, imports e outputs, corrê-los e compará-los em vez de correr uma série de testes já conhecidos. Ou seja deve funcionar mesmo que adicionem testes novos feitos pelo professor ou feitos por vocês.
