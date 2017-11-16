@@ -2,8 +2,9 @@
 
 # Global variables, classpath may need to be user-defined
 location="$(pwd)"
-src_dirs=("$location/mmt-core/" "$location/mmt-app/")
-test_dir="$location/Tests-ei-daily-201711101726/"
+workdir="$(realpath $(dirname $0))" # Only used when the user doesn't use the flags
+src_dirs=("$workdir/mmt-core/" "$workdir/mmt-app/")
+test_dir="$workdir/Tests-ei-daily-201711101726/"
 classpath="/usr/share/java/po-uuilib.jar"
 mainclass="mmt.app.App"
 common=".*A-([0-9]{2,3})-([0-9]{2,3})\."
@@ -98,7 +99,7 @@ function test {
 		# Run the test, save the return code
 		java $javaoptions $mainclass
 		return_code="$?"
-		echo -e "TEST: $commonfile\n\tOPTIONS:$javaoptions" >> $logfile
+		echo -e "TEST: $commonfile\n\tOPTIONS: $javaoptions" >> $logfile
 		if [[ return_code -ne 0 ]]
 		# Java error (ex: missing Main class)
 		then
