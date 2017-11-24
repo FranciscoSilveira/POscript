@@ -10,7 +10,7 @@ O script está escrito em bash, portanto logicamente só corre em SO's com bash.
 
 ## Instalação e resultados
 * Fazer download (ali ao lado)
-* Copiar para a pasta onde estão os testes:
+* Copiar para a pasta onde está o cdigo e os testes:
 ```sh
 $ unzip ~/Downloads/POscript-master.zip -d ~/path/para/a/pasta/do/projecto
 ```
@@ -51,12 +51,13 @@ $ cd ~
 $ ~/Downloads/run2017.sh -s ~/Documents/PO/projecto -t ~/testes_de_PO
 $ cat ./results.txt
 ```
-Caso não queiram usar as flags (y tho), o script vai procurar as directorias mmt-app, mmt-core e Tests-ei-daily-201711101726 na pasta onde está. Ou seja, é esperada uma estrutura deste género:
+**A directoria de testes tem sempre de conter a directoria expected com os ficheiros .out**, independentemente de terem usado flags ou não. Ou seja não funciona com a primeira versão dos testes diários em que os .out estavam na mesma directoria que os .in e .import.
+
+Caso não queiram usar as flags (y tho), o script vai procurar as directorias mmt-app, mmt-core e tests na pasta onde está. Ou seja, é esperada uma estrutura deste género:
 ```
 project
 ├── run2017.sh
 ├── mmt-app
-│   ├── examples
 │   ├── Makefile
 │   ├── mmt-app.jar
 │   └── src
@@ -66,14 +67,16 @@ project
 │   ├── mmt-core.jar
 │   └── src
 │       └── ...
-└── Tests-ei-daily-201711101726
+└── tests
+    ├── expected
+    │   ├── A-001-001.out
+    │   ├── A-001-002.out
+    │   ├── A-001-003.out
+    │   └── ...
     ├── A-001-001.in
-    ├── A-001-001.out
     ├── A-001-002.import
     ├── A-001-002.in
-    ├── A-001-002.out
     ├── A-001-003.in
-    ├── A-001-003.out
     └── ...
 ```
 
