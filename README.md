@@ -39,21 +39,8 @@ TEST: A-001-003-M-ok
 		> Menu Principal
 ```
 
-## Opções
-É possvel definir as directorias de testes e código com flags:
-
-* **-s /path/to/source** : define a directoria onde estão as directorias mmt-app e mmt-core. Isto é usado na compilação dos pacotes e na execução dos testes (classpath).
-* **-t /path/to/tests** : define as directorias onde estão os ficheiros de teste
-
-**O ficheiro de resultados é sempre escrito na directoria actual da shell,** independentemente de terem usado flags ou não, ou de sequer estarem na pasta do script. Ex:
-```sh
-$ cd ~
-$ ~/Downloads/run2017.sh -s ~/Documents/PO/projecto -t ~/testes_de_PO
-$ cat ./results.txt
-```
-**A directoria de testes tem sempre de conter a directoria expected com os ficheiros .out**, independentemente de terem usado flags ou não. Ou seja não funciona com a primeira versão dos testes diários em que os .out estavam na mesma directoria que os .in e .import.
-
-Caso não queiram usar as flags (y tho), o script vai procurar as directorias mmt-app, mmt-core e tests na pasta onde está. Ou seja, é esperada uma estrutura deste género:
+## Estrutura
+Caso não queiram usar as flags explicadas abaixo (y tho), o script vai procurar as directorias mmt-app, mmt-core e tests na pasta onde está. Ou seja, por default é esperada uma estrutura deste género:
 ```
 project
 ├── run2017.sh
@@ -79,10 +66,19 @@ project
     ├── A-001-003.in
     └── ...
 ```
+**O ficheiro de resultados é sempre escrito na directoria actual da shell** 
+**A directoria de testes tem sempre de conter a directoria expected com os ficheiros .out**
+**Por default a directoria de testes chama-se 'tests' e não 'Tests-ei-eval-201711101726'**(porque este nome muda com cada novo pacote de testes), se querem mudar isto usem a flag -t
+
+### Opções
+É possvel definir as directorias de testes e código com flags:
+
+* **-s /path/to/source** : define a directoria onde estão as directorias mmt-app e mmt-core. Isto é usado na compilação dos pacotes e na execução dos testes (classpath).
+* **-t /path/to/tests** : define as directorias onde estão os ficheiros de teste e a directoria expected.
 
 ### Definir o classpath para o .jar fornecido pelos docentes
 O classpath para a parte fornecida é o da VM (/usr/share/java/po-uuilib.jar). Se compilarem o po-uuilib e deixarem o .jar na pasta ou o meterem noutra pasta qualquer, é necessário definir essa parte do classpath **no script** de acordo com isso.
 
-
 ## Testes futuros
 O script usa regex para descobrir todos os inputs, imports e outputs, corrê-los e compará-los em vez de correr uma série de testes já conhecidos. Ou seja deve funcionar mesmo que adicionem testes novos feitos pelo professor ou feitos por vocês.
+
