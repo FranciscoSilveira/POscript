@@ -67,7 +67,9 @@ project
     └── ...
 ```
 **O ficheiro de resultados é sempre escrito na directoria actual da shell** 
+
 **A directoria de testes tem sempre de conter a directoria expected com os ficheiros .out**
+
 **Por default a directoria de testes chama-se 'tests' e não 'Tests-ei-eval-201711101726'**(porque este nome muda com cada novo pacote de testes), se querem mudar isto usem a flag -t
 
 ### Opções
