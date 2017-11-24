@@ -102,7 +102,7 @@ function test {
 		return_code="$?"
 		echo -e "TEST: $commonfile\n\tOPTIONS:\n\t\t$javaoptions" >> $logfile
 		expectedfile=${commonfile/$commonfilename/expected\/$commonfilename$expected}
-		if [[ return_code -ne 0 ]]
+		if [[ $return_code -ne 0 ]]
 		# Java error (ex: missing Main class)
 		then
 			echo -e "\tFailed!\n\t\tReturn code: $return_code" >> $logfile
