@@ -4,10 +4,10 @@
 location="$(pwd)"
 workdir="$(realpath $(dirname $0))" # Only used when the user doesn't use the flags
 src_dirs=("$workdir/mmt-core/" "$workdir/mmt-app/")
-test_dir="$workdir/Tests-ei-daily-201711101726/"
+test_dir="$workdir/tests/"
 classpath="/usr/share/java/po-uuilib.jar"
 mainclass="mmt.app.App"
-common=".*A-([0-9]{2,3})-([0-9]{2,3})\."
+common=".*A-([0-9]{2,3})-([0-9]{2,3})-M-ok\."
 input="in"
 import="import"
 output="outhyp"
@@ -82,8 +82,9 @@ function test {
 	do
 		# Find the common substring for this test
 		#commonfile=$(echo $inputfile | cut -d '.' -f 2 -s | cut -d '/' -f '2' -s)
-		commonfile=${inputfile%in}
-
+		commonfile=${inputfile%$input}
+		commonfilename="$(basename $commonfile)"
+		
 		# Create (or clear) the output file for this test
 		outputfile="$commonfile$output"
 		#echo "" > $outputfile
@@ -95,19 +96,25 @@ function test {
 		then
 			javaoptions+=" -Dimport=$importfile"
 		fi
-
+		
 		# Run the test, save the return code
 		java $javaoptions $mainclass
 		return_code="$?"
-		echo -e "TEST: $commonfile\n\tOPTIONS: $javaoptions" >> $logfile
+		echo -e "TEST: $commonfile\n\tOPTIONS:\n\t\t$javaoptions" >> $logfile
+		expectedfile=${commonfile/$commonfilename/expected\/$commonfilename$expected}
 		if [[ return_code -ne 0 ]]
 		# Java error (ex: missing Main class)
 		then
 			echo -e "\tFailed!\n\t\tReturn code: $return_code" >> $logfile
 			failed=$((failed+1))
+		elif [[ ! -f $expectedfile ]]
+		# Expected file not found
+		then
+			echo -e  "\tFailed!\n\t\tExpected output file not found: $expectedfile" >> $logfile
+			failed=$((failed+1))
 		else
 		# Compare the obtained output to the expected
-			expectedfile="$commonfile$expected"
+			#expectedfile="$commonfile$expected"
 			differences=`diff -w $outputfile $expectedfile`
 			if [[ -z $differences ]]
 			then
@@ -131,7 +138,7 @@ function test {
 
 echo "Source directories: ${src_dirs[@]}"
 echo "Test directory: $test_dir"
-echo $classpath
+echo "Classpath: $classpath"
 compile
 test
 
