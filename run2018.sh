@@ -5,11 +5,11 @@ packages=("sth-core" "sth-app")	# The packages (the order is important)
 mainclass="sth.app.App"			# The class to be executed
 
 # Main variables
-location="$(pwd)"						# Where the shell is
+location="$(pwd)"			# Where the shell is
 work_dir="$(realpath $(dirname $0))" 	# Where the project is
-src_dirs=()								# The source directories (will be set later)
-test_dir="$work_dir/tests/"						# Default tests directory
-classpath="/usr/share/java/po-uuilib.jar"		# Default classpath
+src_dirs=()				# The source directories (will be set later)
+test_dir="$work_dir/tests/"		# Default tests directory
+classpath="/usr/share/java/po-uuilib.jar"	# Default classpath
 common=".*A-([0-9]{2,3})-([0-9]{2,3})-M-ok\."	# Regex for the test files
 
 # Test variables
@@ -84,13 +84,11 @@ function run_tests {
 	for inputfile in `find $test_dir -regextype posix-extended  -regex "$common$input" | sort`
 	do
 		# Find the common substring for this test
-		#commonfile=$(echo $inputfile | cut -d '.' -f 2 -s | cut -d '/' -f '2' -s)
 		commonfile=${inputfile%$input}
 		commonfilename="$(basename $commonfile)"
 		
 		# Create (or clear) the output file for this test
 		outputfile="$commonfile$output"
-		#echo "" > $outputfile
 		javaoptions="-cp $classpath -Din=$inputfile -Dout=$outputfile"
 
 		# Find and add an import file for this test, if it exists
