@@ -144,7 +144,7 @@ function run_tests {
 echo "Source directories: ${src_dirs[@]}"
 echo "Test directory: $test_dir"
 echo "Classpath: $classpath"
-exit 0
+
 compile
 run_tests
 
